@@ -1,0 +1,44 @@
+.city-name {
+  display: flex;
+}
+
+.city-name > img {
+  width: 25px;
+  margin-right: 10px;
+}
+
+.current-temp {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.main-temp {
+  font-size: 42px;
+  color: var(--ion-color-step-850, #262626);
+}
+
+.current-infos {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.list-icon {
+  flex: unset;
+}
+
+.list-icon > img {
+  width: 30px;
+  height: 30px;
+}
+
+.other-info {
+  display: flex !important;
+  justify-content: space-between;
+}
+
+.other-info-name {
+  color: var(--ion-color-step-550, #737373);
+}
