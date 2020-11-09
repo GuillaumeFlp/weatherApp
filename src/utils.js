@@ -1,3 +1,22 @@
+const getCurrentPosition = () => {
+  return new Promise((resolve, reject) => {
+    const successCallback = (position) => {
+      const { latitude, longitude } = position.coords;
+      resolve({ latitude, longitude });
+    };
+
+    const errorCallback = (error) => {
+      reject(new Error(`ERROR (${error.code}): ${error.message}`));
+    };
+
+    navigator.geolocation.getCurrentPosition(successCallback, errorCallback, {
+      enableHighAccuracy: true,
+      timeout: 10000,
+      maximumAge: 0,
+    });
+  });
+};
+
 const getCityName = (latitude, longitude) => {
   return fetch(
     `http://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=metric&APPID=${process.env.REACT_APP_OPEN_WEATHER_MAP_KEY}
@@ -54,6 +73,7 @@ const uvNumberToRange = (value) => {
 };
 
 export {
+  getCurrentPosition,
   getCityName,
   getCurrentWeatherInfos,
   capitalizeFirstLetter,

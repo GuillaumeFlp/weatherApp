@@ -1,0 +1,9 @@
+.daily-weather {
+  display: flex !important;
+  justify-content: space-between;
+}
+
+.daily-weather-description {
+  font-size: 13px;
+  color: var(--ion-color-step-550, #737373);
+}

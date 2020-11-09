@@ -14,19 +14,20 @@ import dayjs from 'dayjs';
 import './TodayWeather.css';
 
 import {
+  getCurrentPosition,
   getCityName,
   getCurrentWeatherInfos,
   capitalizeFirstLetter,
   uvNumberToRange,
-} from '../utils';
+} from '../../utils';
 
-import locationIcon from '../assets/images/location-pointer.svg';
-import sunsetIcon from '../assets/images/sunset.svg';
-import sunriseIcon from '../assets/images/sunrise.svg';
-import humidityIcon from '../assets/images/humidity.svg';
-import pressureIcon from '../assets/images/pressure.svg';
-import windIcon from '../assets/images/wind.svg';
-import UVIcon from '../assets/images/uv.svg';
+import locationIcon from '../../assets/images/location-pointer.svg';
+import sunsetIcon from '../../assets/images/sunset.svg';
+import sunriseIcon from '../../assets/images/sunrise.svg';
+import humidityIcon from '../../assets/images/humidity.svg';
+import pressureIcon from '../../assets/images/pressure.svg';
+import windIcon from '../../assets/images/wind.svg';
+import UVIcon from '../../assets/images/uv.svg';
 
 const TodayWeather = () => {
   const [cityName, setCityName] = useState(null);
@@ -44,39 +45,29 @@ const TodayWeather = () => {
   const [UV, setUV] = useState(null);
 
   useEffect(() => {
-    const successCallback = (position) => {
-      const { latitude, longitude } = position.coords;
+    getCurrentPosition().then((response) => {
+      const { latitude, longitude } = response;
 
       getCityName(latitude, longitude).then((response) => {
         setCityName(response);
       });
 
       getCurrentWeatherInfos(latitude, longitude).then((response) => {
-        setCurrentTemp(Math.round(response.current.temp));
-        setDayTime(response.current.dt * 1000);
-        setDescription(
-          capitalizeFirstLetter(response.current.weather[0].description)
-        );
-        setFeelsLike(Math.round(response.current.feels_like));
-        setSunrise(response.current.sunrise * 1000);
-        setSunset(response.current.sunset * 1000);
+        const { current } = response;
+
+        setCurrentTemp(Math.round(current.temp));
+        setDayTime(current.dt * 1000);
+        setDescription(capitalizeFirstLetter(current.weather[0].description));
+        setFeelsLike(Math.round(current.feels_like));
+        setSunrise(current.sunrise * 1000);
+        setSunset(current.sunset * 1000);
         setMinTemp(Math.round(response.daily[0].temp.min));
         setMaxTemp(Math.round(response.daily[0].temp.max));
-        setHumidity(response.current.humidity);
-        setPressure(response.current.pressure);
-        setWind(Math.round(response.current.wind_speed * 3.6));
-        setUV(uvNumberToRange(response.current.uvi));
+        setHumidity(current.humidity);
+        setPressure(current.pressure);
+        setWind(Math.round(current.wind_speed * 3.6));
+        setUV(uvNumberToRange(current.uvi));
       });
-    };
-
-    const errorCallback = (error) => {
-      console.error(`ERROR (${error.code}): ${error.message}`);
-    };
-
-    navigator.geolocation.getCurrentPosition(successCallback, errorCallback, {
-      enableHighAccuracy: true,
-      timeout: 10000,
-      maximumAge: 0,
     });
   }, []);
 

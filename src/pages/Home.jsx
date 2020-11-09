@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { IonContent, IonPage, IonText } from '@ionic/react';
-import TodayWeather from '../components/TodayWeather';
+import TodayWeather from '../components/TodayWeather/TodayWeather';
+import WeeklyWeather from '../components/WeeklyWeather/WeeklyWeather';
 
 import './Home.css';
 
 const Home = () => {
+  useEffect(() => {}, []);
+
   return (
     <IonPage>
       <IonContent fullscreen>
@@ -12,6 +15,7 @@ const Home = () => {
           <h1>Weather</h1>
         </IonText>
         <TodayWeather />
+        <WeeklyWeather />
       </IonContent>
     </IonPage>
   );
