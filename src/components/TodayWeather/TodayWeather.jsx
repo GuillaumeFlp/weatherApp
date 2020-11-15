@@ -13,6 +13,8 @@ import {
 import dayjs from 'dayjs';
 import './TodayWeather.css';
 
+import HourlyWheater from '../HourlyWeather/HourlyWeather';
+
 import {
   getCurrentPosition,
   getCityName,
@@ -92,6 +94,8 @@ const TodayWeather = () => {
           </div>
         </div>
       </IonCardHeader>
+
+      <HourlyWheater />
 
       <IonCardContent>
         <IonList>

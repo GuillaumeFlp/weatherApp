@@ -27,7 +27,6 @@ const WeeklyWeather = () => {
       const { latitude, longitude } = response;
 
       getCurrentWeatherInfos(latitude, longitude).then((response) => {
-        console.log(response);
         setDaily(response.daily);
 
         daily.forEach((day) => {
