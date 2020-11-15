@@ -1,0 +1,25 @@
+.hourly-list {
+  display: flex;
+  overflow-x: scroll;
+  margin: 0px 16px;
+  padding-bottom: 16px;
+  margin-top: 12px;
+}
+
+.hourly-item {
+  margin-right: 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hourly-item-temp {
+  color: var(--ion-color-step-850, #262626);
+  font-size: 20px;
+}
+
+.hourly-weather-icon {
+  max-width: unset;
+  height: 60px;
+  width: 60px;
+}
