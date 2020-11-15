@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react';
 import dayjs from 'dayjs';
 import './HourlyWeather.css';
 
-import { weather } from 'cli-spinners';
 import { getCurrentPosition, getCurrentWeatherInfos } from '../../utils';
 
 const HourlyWeather = () => {

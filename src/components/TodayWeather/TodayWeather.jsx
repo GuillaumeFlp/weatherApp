@@ -35,6 +35,7 @@ const TodayWeather = () => {
   const [cityName, setCityName] = useState(null);
   const [dayTime, setDayTime] = useState(null);
   const [currentTemp, setCurrentTemp] = useState(null);
+  const [currentIcon, setCurrentIcon] = useState(null);
   const [description, setDescription] = useState(null);
   const [minTemp, setMinTemp] = useState(null);
   const [maxTemp, setMaxTemp] = useState(null);
@@ -57,6 +58,7 @@ const TodayWeather = () => {
       getCurrentWeatherInfos(latitude, longitude).then((response) => {
         const { current } = response;
 
+        setCurrentIcon(current.weather[0].icon);
         setCurrentTemp(Math.round(current.temp));
         setDayTime(current.dt * 1000);
         setDescription(capitalizeFirstLetter(current.weather[0].description));
@@ -84,7 +86,16 @@ const TodayWeather = () => {
           {dayjs(dayTime).format('ddd, MMMM DD h:mm a')}
         </IonCardSubtitle>
         <div className="current-temp">
-          <div className="main-temp">{currentTemp}°</div>
+          <div className="current-temp-main">
+            {currentIcon && (
+              <img
+                className="current-weather-icon"
+                src={`http://openweathermap.org/img/wn/${currentIcon}@2x.png`}
+                alt="Weathr icon"
+              />
+            )}
+            <div className="main-temp">{currentTemp}°</div>
+          </div>
           <div className="current-infos">
             <span>{description}</span>
             <span className="feels-like">
